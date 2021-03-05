@@ -13,6 +13,13 @@ def index(request):
         "comments" : Comment.objects.all()
     })
 
+def item(request, item):
+    return render(request, "auctions/item_page.html", {
+        "item": item,
+        "listing" : Listing.objects.all(),
+        "bids" : Bid.objects.all(),
+        "comments" : Comment.objects.all()    
+    })
 
 def login_view(request):
     if request.method == "POST":

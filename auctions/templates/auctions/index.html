@@ -1,17 +1,14 @@
 {% extends "auctions/layout.html" %}
-{% load static %}
-{% block css %}
-<link href="{% static 'auctions/style2.css' %}" rel="stylesheet">
-{% endblock %}
 {% block body %}
 <h2>Active Listings</h2>
 <div>
     {% for item in listing %}
+    <a href="{% url 'item_page' item.title %}">
     <div class="item">
         <div id="image"><img src="{{ item.image }}" alt="{{ item.title }}" width="400px"></div>
         <div id="text">
             <h4>{{ item.title }}</h4>
-            <h6>{{ item.price }}</h6>
+            <h6>Price: ${{ item.price }}</h6><br>
             <p>{{ item.date }}</p>
             <p>
                 {% for comm in bids %}
@@ -22,6 +19,7 @@
             </p>
         </div>
     </div>
+    </a>
     {% endfor %}
 </div>
 {% endblock %}

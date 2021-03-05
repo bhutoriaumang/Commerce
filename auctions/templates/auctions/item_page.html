@@ -1,0 +1,18 @@
+{% extends "auctions/layout.html" %}
+{% block body %}
+<h2>Listings: {{ item }}</h2>
+<div>
+    {% for list_item in listing %}
+        {% if list_item.title == item %}
+        <div><img id="item_image" src="{{ list_item.image }}" width="400px"></div>
+        <h6>{{ list_item.description }}</h6><br>
+        <h4>${{ list_item.price }}</h4>
+        {% for bid in bids %}
+            
+        {% endfor %}
+        <button type="button" class="btn btn-primary">Place Bid</button>
+        <h5>Details</h5>
+        {% endif %}
+    {% endfor %}
+</div>
+{% endblock %}
