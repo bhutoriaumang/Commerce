@@ -1,0 +1,15 @@
+#image,#text{
+    display: inline-block;
+    padding: 40px;
+}
+
+#image{
+    height: 400px;
+
+}
+
+.item{
+    margin: 50px;
+    border: 2px solid grey;
+    border-radius: 5px;
+}

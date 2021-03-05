@@ -1,18 +1,27 @@
 {% extends "auctions/layout.html" %}
-
+{% load static %}
+{% block css %}
+<link href="{% static 'auctions/style2.css' %}" rel="stylesheet">
+{% endblock %}
 {% block body %}
-    <h2>Active Listings</h2>
-    <ol>
-        {% for item in listing %}
-            <li>
-                <ul>
-                    <li>{{ item.title }}</li>
-                    <li>{{ item.description }}</li>
-                    <li>{{ item.price }}</li>
-                    <li><img src="{{ item.image }}" alt="{{ item.title }}"></li>
-                    <li>{{ item.date }}</li>
-                </ul>
-            </li>
-        {% endfor %}
-    </ol>
+<h2>Active Listings</h2>
+<div>
+    {% for item in listing %}
+    <div class="item">
+        <div id="image"><img src="{{ item.image }}" alt="{{ item.title }}" width="400px"></div>
+        <div id="text">
+            <h4>{{ item.title }}</h4>
+            <h6>{{ item.price }}</h6>
+            <p>{{ item.date }}</p>
+            <p>
+                {% for comm in bids %}
+                    {% if comm.serial == item %}
+                        <p>{{ comm.username }}</p>
+                    {% endif %}
+                {% endfor %}
+            </p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
 {% endblock %}
