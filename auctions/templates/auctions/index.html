@@ -1,22 +1,20 @@
 {% extends "auctions/layout.html" %}
+{% load static %}
+{% block CSS %}
+    <link href="{% static 'auctions/styles3.css' %}" rel="stylesheet">
+{% endblock %}
 {% block body %}
 <h2>Active Listings</h2>
 <div>
     {% for item in listing %}
-    <a href="{% url 'item_page' item.title %}">
+    <a href="{% url 'item_page' item.id %}">
     <div class="item">
-        <div id="image"><img src="{{ item.image }}" alt="{{ item.title }}" width="400px"></div>
+        <div id="image"><img src="{{ item.image }}" alt="{{ item.id }}" width="400px"></div>
         <div id="text">
             <h4>{{ item.title }}</h4>
             <h6>Price: ${{ item.price }}</h6><br>
+            <p>{{ item.id }}</p>
             <p>{{ item.date }}</p>
-            <p>
-                {% for comm in bids %}
-                    {% if comm.serial == item %}
-                        <p>{{ comm.username }}</p>
-                    {% endif %}
-                {% endfor %}
-            </p>
         </div>
     </div>
     </a>
