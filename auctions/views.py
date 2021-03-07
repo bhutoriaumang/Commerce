@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from .models import User, Listing, Bid, Comment
 
-logged = True
+logged = False
 username = ""
 
 def index(request):
@@ -55,6 +55,18 @@ def place_bid(request, item):
             "bids" : Bid.objects.filter(serial = Listing.objects.get(id = item)),
             "comments" : Comment.objects.all()    
         })
+
+def create(request):
+    return render(request, "auctions/create.html")
+
+def createlist(request):
+    lis = Listing.objects.create(title = request.POST.get("title"), image= request.POST.get("image"), price = request.POST.get("price"), description= request.POST.get("description"))
+    lis.save()
+    return render(request, "auctions/index.html",{
+        "listing" : Listing.objects.all(),
+        "bids" : Bid.objects.all(),
+        "comments" : Comment.objects.all()
+    })
 
 def login_view(request):
     global logged

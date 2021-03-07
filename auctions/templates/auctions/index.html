@@ -6,6 +6,7 @@
 {% block body %}
 <h2>Active Listings</h2>
 <div>
+    <h1>{{ title }}</h1>
     {% for item in listing %}
     <a href="{% url 'item_page' item.id %}">
     <div class="item">
