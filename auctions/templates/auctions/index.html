@@ -1,8 +1,4 @@
 {% extends "auctions/layout.html" %}
-{% load static %}
-{% block CSS %}
-    <link href="{% static 'auctions/styles3.css' %}" rel="stylesheet">
-{% endblock %}
 {% block body %}
 <h2>Active Listings</h2>
 <div>
@@ -14,8 +10,7 @@
         <div id="text">
             <h4>{{ item.title }}</h4>
             <h6>Price: ${{ item.price }}</h6><br>
-            <p>{{ item.id }}</p>
-            <p>{{ item.date }}</p>
+            <p>Created on: {{ item.date }}</p>
         </div>
     </div>
     </a>

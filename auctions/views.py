@@ -22,7 +22,7 @@ def item(request, item):
         "item": item,
         "listing" : lis,
         "bids" : Bid.objects.filter(serial = Listing.objects.get(id = item)),
-        "comments" : Comment.objects.all()    
+        "comments" : Comment.objects.filter(serial = Listing.objects.get(id = item))    
     })
 
 
@@ -42,7 +42,7 @@ def place_bid(request, item):
             "item": item,
             "listing" : lis,
             "bids" : Bid.objects.filter(serial = Listing.objects.get(id = item)),
-            "comments" : Comment.objects.all()    
+            "comments" : Comment.objects.filter(serial = Listing.objects.get(id = item))    
             })
         bid = Bid.objects.create(serial = Listing.objects.get(id = item), username = username, amt = amu)
         bid.save()
@@ -53,14 +53,19 @@ def place_bid(request, item):
             "item": item,
             "listing" : lis,
             "bids" : Bid.objects.filter(serial = Listing.objects.get(id = item)),
-            "comments" : Comment.objects.all()    
+            "comments" : Comment.objects.filter(serial = Listing.objects.get(id = item))    
         })
 
 def create(request):
     return render(request, "auctions/create.html")
 
 def createlist(request):
-    lis = Listing.objects.create(title = request.POST.get("title"), image= request.POST.get("image"), price = request.POST.get("price"), description= request.POST.get("description"))
+    lis = Listing.objects.create(title = request.POST.get("title"), 
+    image= request.POST.get("image"), 
+    price = request.POST.get("price"), 
+    description= request.POST.get("description"),
+    username = username)
+
     lis.save()
     return render(request, "auctions/index.html",{
         "listing" : Listing.objects.all(),

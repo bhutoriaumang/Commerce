@@ -9,7 +9,6 @@ body {
     width: 50%;
 }
 
-
 .item{
     margin: 50px;
     border: 2px solid grey;
@@ -27,6 +26,14 @@ p{
 
 h4, h6 {
     color: black;
+}
+
+h5{
+    display: inline-block;
+}
+
+#add-comment{
+    float: right;
 }
 
 #item_image{

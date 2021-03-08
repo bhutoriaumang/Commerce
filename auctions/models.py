@@ -13,6 +13,7 @@ class Listing(models.Model):
     description = models.CharField(max_length=200)
     price = models.FloatField()
     date = models.DateTimeField(auto_now=False, auto_now_add=True)
+    username = models.CharField(max_length=64)
 
     def __str__(self):
         return f"{self.title} {self.image} {self.description} {self.price} {self.date}"

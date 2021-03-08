@@ -1,19 +1,24 @@
 {% extends "auctions/layout.html" %}
 {% block body %}
+<h4>Enter the details of the product:</h4>
 <form action="{% url 'createlist' %}" method="post">
     {% csrf_token %}
     <div class="form-group">
+        <label class="form-label">Name</label>
         <input autofocus class="form-control" type="text" name="title" placeholder="Product Name">
-    </div>
+    </div><br>
     <div class="form-group">
+        <label class="form-label">Image URL</label>
         <input class="form-control" type="url" name="image" placeholder="Image Url(If any)">
-    </div>
+    </div><br>
     <div class="form-group">
-        <input class="form-control" type="number" name="price" placeholder="Product price">
-    </div>
+        <label class="form-label">Price</label>
+        <input class="form-control" type="number" name="price" placeholder="Product Price">
+    </div><br>
     <div class="form-group">
-        <input class="form-control" type="text" name="description" placeholder="Product description">
-    </div>
-    <input class="btn btn-primary" type="submit" value="Login">
+        <label class="form-label">Description</label>
+        <textarea class="form-control" name="description" rows="5" placeholder="Product Description"></textarea>
+    </div><br>
+    <input class="btn btn-primary" type="submit" value="Submit">
 </form>
 {% endblock %}

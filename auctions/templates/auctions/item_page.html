@@ -1,18 +1,58 @@
-{% extends "auctions/layout.html" %} {% block body %}
+{% extends "auctions/layout.html" %} 
+{% block body %}
 <h2>Listings: {{ listing.title }}</h2>
 <div>
-    <h3>{{ message }}</h3>
+  <h3>{{ message }}</h3>
   <div><img id="item_image" src="{{ listing.image }}" width="400px" /></div>
   <h6>{{ listing.description }}</h6>
   <br />
-  <h4>${{ listing.price }}</h4>
-  {% for bid in bids %}
-  <h1>{{ bid.amt }}</h1>
-  {% endfor %}
-  <form action="{% url 'place_bid' item%}">
-    <input type="number" name="q" />
-    <input type="submit" value="Place Bid" />
+  <h3>${{ listing.price }}</h3>
+
+  <form class="row g-2" action="{% url 'place_bid' item%}">
+    <div class="col-auto">
+      <input type="number" name="q" class="form-control" placeholder="Enter bid amount">
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-primary mb-3">Place Bid</button>
+    </div>
   </form>
+
+  <br>
+  <p>
+    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+      aria-controls="collapseExample">
+      Show Bid History
+    </a>
+  </p>
+  <div class="collapse" id="collapseExample">
+    <div class="card card-body">
+      {% for bid in bids %}
+      <ul>
+        <li>A bid of ${{ bid.amt }} was placed by {{ bid.username }}</li>
+      </ul>
+      {% endfor %}
+      {% if not bids %}
+      No bids placed
+      {% endif %}
+    </div>
+  </div>
+  <br>
   <h5>Details</h5>
+  <ul>
+    <li>Listed by: {{ listing.username }}</li>
+  </ul>
+  <div>
+  <h5>Comments:</h5>
+  <button id="add-comment" type="button" class="btn btn-outline-primary">Add a comment</button>
+  </div><br>
+    {% for comms in comments %}
+    <div class="card card-body">
+      <h5>{{ comms.username }}</h5>
+      {{ comms.comment }}
+    </div>
+    {% endfor %}
+    {% if not comments %}
+    No Comments available for this product.
+    {% endif %}
 </div>
 {% endblock %}
