@@ -1,0 +1,23 @@
+{% extends "auctions/layout.html" %} {% block body %}
+<h2>Active Listings</h2>
+<div>
+  <h1>{{ title }}</h1>
+  {% for item in listing %} 
+  {% for watchs in watch %}
+  {% if item == watchs.serial %}
+  <a href="{% url 'item_page' item.id %}">
+    <div class="item">
+      <div id="image">
+        <img src="{{ item.image }}" alt="{{ item.id }}" width="400px" />
+      </div>
+      <div id="text">
+        <h4>{{ item.title }}</h4>
+        <h6>Price: ${{ item.price }}</h6>
+        <br />
+        <p>Created on: {{ item.date }}</p>
+      </div>
+    </div>
+  </a>
+  {% endif %} {% endfor %} {% endfor %}
+</div>
+{% endblock %}

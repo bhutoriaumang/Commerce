@@ -3,7 +3,7 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
-from .models import User, Listing, Bid, Comment
+from .models import User, Listing, Bid, Comment, Watchlist
 
 logged = False
 username = ""
@@ -60,6 +60,7 @@ def create(request):
     return render(request, "auctions/create.html")
 
 def createlist(request):
+    global username
     lis = Listing.objects.create(title = request.POST.get("title"), 
     image= request.POST.get("image"), 
     price = request.POST.get("price"), 
@@ -71,6 +72,21 @@ def createlist(request):
         "listing" : Listing.objects.all(),
         "bids" : Bid.objects.all(),
         "comments" : Comment.objects.all()
+    })
+def createwatch(request):
+    global username
+    lis = Listing.objects.get(id = request.GET.get("q"))
+    wat = Watchlist.objects.create(username = username, serial = lis)
+    wat.save()
+    return HttpResponseRedirect("watch")
+
+def watch(request):
+    global username
+    global logged
+    logged = True
+    return render(request, "auctions/watchlist.html",{
+        "listing" : Listing.objects.all(),
+        "watch" : Watchlist.objects.filter(username = username),
     })
 
 def login_view(request):

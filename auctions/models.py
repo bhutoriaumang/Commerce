@@ -28,3 +28,7 @@ class Comment(models.Model):
     username = models.CharField(max_length=64)
     comment = models.CharField(max_length=200)
     date = models.DateTimeField(auto_now_add=True)
+
+class Watchlist(models.Model):
+    serial = models.ForeignKey(Listing, on_delete=models.CASCADE)
+    username = models.CharField(max_length=64)

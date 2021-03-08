@@ -3,6 +3,10 @@
 <h2>Listings: {{ listing.title }}</h2>
 <div>
   <h3>{{ message }}</h3>
+  <form action="{% url 'createwatch' %}">
+    <input type="text" name="q" id="q" hidden value="{{ listing.id }}">
+    <input type="submit" value="Add to Watchlist">
+  </form>
   <div><img id="item_image" src="{{ listing.image }}" width="400px" /></div>
   <h6>{{ listing.description }}</h6>
   <br />
